@@ -97,7 +97,7 @@ df['EntryCategory'] = df['YearsOfEntry'].apply(categorize_years)
 
 st.write('---')
 
-graph_choice = st.selectbox('Select a graph', ['Position Distribution', 'Team Distribution', 'Team vs Wage'])
+graph_choice = st.selectbox('Select a graph', ['Position Distribution', 'Team Distribution'])
 
 if graph_choice == 'Position Distribution':
     # Create a pie chart of position proportions
