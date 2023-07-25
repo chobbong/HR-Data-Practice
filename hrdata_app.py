@@ -115,7 +115,7 @@ elif graph_choice == 'Team Distribution':
 
 st.write('---')
 
-graph_choice = st.selectbox('Check the monthly pay according to your position or years of service ', ['Position vs Wage','Team vs Wage', 'Years of Entry vs Wage'])
+graph_choice = st.selectbox('Check the monthly pay according to your position or years of service ', ['Position vs Wage', 'Years of Entry vs Wage','Team vs Wage'])
 
 if graph_choice == 'Position vs Wage':
     # Compute the average 'Total-Payment-Amount' for each position
