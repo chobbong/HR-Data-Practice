@@ -5,6 +5,7 @@ import shap
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
+import seaborn as sns
 
 st.write("""
 # Wage Analysis
@@ -51,7 +52,7 @@ df['DateOfEntry'] = pd.to_datetime(df['DateOfEntry'])
 # Calculate the years of entry
 df['YearsOfEntry'] = (pd.Timestamp.now() - df['DateOfEntry']).dt.days / 365
 
-if st.button('Predict Total Payment Amount after 5 years **(Click here)**'):
+if st.button('Predict Total Pay Amount after 5 years **(Click here)**'):
     # Prepare the data for training
     X = df[['YearsOfEntry']]
     y = df['Total-Payment-Amount']
@@ -77,7 +78,7 @@ if st.button('Predict Total Payment Amount after 5 years **(Click here)**'):
     new_years_of_entry = X_test.mean() + years_increase
     new_total_payment = lr.predict([new_years_of_entry.values])
     new_total_payment[0] =  int(new_total_payment[0]) 
-    st.write(f'Predicted Total Payment Amount for an increase of {years_increase} years in Years of Entry:')
+    st.write(f'Predicted Total Pay Amount for an increase of {years_increase} years in Years of Entry:')
     st.write(f'{new_total_payment[0]:,} won')
     
 # Define a function to categorize years of entry
@@ -132,8 +133,8 @@ if graph_choice == 'Position vs Wage':
         xval = bar.get_width()
         plt.text(xval, bar.get_y() + bar.get_height()/2, f"{int(xval):,} won"+" ", va='center', ha='right', color='white')
 
-    plt.title('Average Total Payment Amount by Position')
-    plt.xlabel('Average Total Payment Amount')
+    plt.title('Average Total Pay Amount by Position')
+    plt.xlabel('Average Total Pay Amount')
     plt.ylabel('Position')
     p1 = plt
     st.pyplot(p1)
@@ -158,8 +159,8 @@ elif graph_choice == 'Years of Entry vs Wage':
         xval = bar.get_width()
         plt.text(xval, bar.get_y() + bar.get_height()/2, f"{int(xval):,} won"+" ", va='center', ha='right', color='white')
 
-    plt.title('Average Total Payment Amount by Years of Entry')
-    plt.xlabel('Average Total Payment Amount')
+    plt.title('Average Total Pay Amount by Years of Entry')
+    plt.xlabel('Average Total Pay Amount')
     plt.ylabel('Years of Entry')
     p2 = plt
     st.pyplot(p2)
@@ -180,11 +181,33 @@ elif graph_choice == 'Team vs Wage':
         xval = bar.get_width()
         plt.text(xval, bar.get_y() + bar.get_height()/2, f"{int(xval):,} won"+" ", va='center', ha='right', color='white')
 
-    plt.title('Average Total Payment Amount by Team')
-    plt.xlabel('Average Total Payment Amount')
+    plt.title('Average Total Pay  Amount by Team')
+    plt.xlabel('Average Total Pay Amount')
     plt.ylabel('Team')
     st.pyplot(plt)
 
+st.write('---')
+
+fig, ax = plt.subplots(figsize=(10, 8))
+ax.scatter(df['YearsOfEntry'], df['Total-Payment-Amount'], alpha=0.5)
+ax.set_title('Scatter plot: Years of Entry vs Total Pay  Amount')
+ax.set_xlabel('Years of Entry')
+ax.set_ylabel('Total Payment Amount (won)')
+
+st.pyplot(plt)
+
+st.write('---')
+
+st.write('distribution of Total Pay Amount for each team')
+# Box plot between 'Team' and 'Total-Payment-Amount'
+plt.figure(figsize=(10, 8))
+ax = sns.boxplot(x='Team', y='Total-Pay-Amount', data=df)
+plt.title('Box plot: Team vs Total Pay Amount')
+plt.xlabel('Team')
+plt.ylabel('Total Pay Amount (won)')
+plt.xticks(rotation=90)
+
+st.pyplot(plt)
 
 
 # ...previous code...
