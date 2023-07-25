@@ -188,7 +188,7 @@ elif graph_choice == 'Team vs Wage':
 
 st.write('---')
 
-st.write('Scatter plot between Years of Entry and Total Pay Amount')
+st.subheader('Scatter plot between Years of Entry and Total Pay Amount')
 fig, ax = plt.subplots(figsize=(10, 8))
 ax.scatter(df['YearsOfEntry'], df['Total-Payment-Amount'], alpha=0.5)
 ax.set_title('Scatter plot: Years of Entry vs Total Pay  Amount')
@@ -199,7 +199,7 @@ st.pyplot(plt)
 
 st.write('---')
 
-st.write('distribution of Total Pay Amount for each team')
+st.subheader('distribution of Total Pay Amount for each team')
 # Box plot between 'Team' and 'Total-Payment-Amount'
 plt.figure(figsize=(10, 8))
 ax = sns.boxplot(x='Team', y='Total-Payment-Amount', data=df)
