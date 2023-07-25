@@ -34,10 +34,10 @@ df['Position'] = df['Position'].map(position_translation)
 
 # Count the number of employees in each position
 position_counts = df['Position'].value_counts()
-team_proportions = df['Team'].value_counts(normalize=True)
+team_counts = df['Team'].value_counts(normalize=True)
 # Calculate the proportion of employees in each position
 position_proportions = position_counts / position_counts.sum()
-
+team_proportions = team_counts / team_counts.sum()
 
 
 
@@ -183,8 +183,7 @@ elif graph_choice == 'Team vs Wage':
     plt.title('Average Total Payment Amount by Team')
     plt.xlabel('Average Total Payment Amount')
     plt.ylabel('Team')
-    p3 = plt
-    st.pyplot(p3)
+    st.pyplot(plt)
 
 
 
